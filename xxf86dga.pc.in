@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: Xxf86dga
+Description: XFree86 Direct Graphics Access Extension Library
+Version: @VERSION@
+Cflags: -I${includedir} @XXF86DGA_CFLAGS@
+Libs: -L${libdir} -lXxf86dga @XXF86DGA_LIBS@
