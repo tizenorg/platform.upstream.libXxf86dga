@@ -29,7 +29,7 @@ libmandir = $(mandir)/man$(LIB_MAN_SUFFIX)
 
 libman_SOURCES = XDGA.man
 
-BUILT_SOURCES = .shadows.DONE
+BUILT_SOURCES = shadows.DONE
 
 EXTRA_DIST = $(libman_SOURCES)
 
@@ -78,7 +78,7 @@ DGAFUNCS = XDGAQueryExtension \
 
 XDGA_shadows = XF86DGA XFree86-DGA $(DGAFUNCS)
 
-.shadows.DONE:
+shadows.DONE:
 	-rm -f $(XDGA_shadows:=.$(LIB_MAN_SUFFIX))
 	(for i in $(XDGA_shadows:=.$(LIB_MAN_SUFFIX)) ; do \
 	 echo .so man$(LIB_MAN_SUFFIX)/XDGA.$(LIB_MAN_SUFFIX) > $$i; \
