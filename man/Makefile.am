@@ -35,8 +35,8 @@ EXTRA_DIST = $(libman_SOURCES)
 
 CLEANFILES = $(libman_DATA) $(BUILT_SOURCES)
 
-libman_DATA = $(libman_SOURCES:man=$(LIB_MAN_SUFFIX)) \
-	      $(XDGA_shadows:=.$(LIB_MAN_SUFFIX))
+libman_DATA = $(libman_SOURCES:man=@LIB_MAN_SUFFIX@) \
+	      $(XDGA_shadows:=.@LIB_MAN_SUFFIX@)
 
 SED = sed
 
@@ -79,7 +79,7 @@ DGAFUNCS = XDGAQueryExtension \
 XDGA_shadows = XF86DGA XFree86-DGA $(DGAFUNCS)
 
 shadows.DONE:
-	-rm -f $(XDGA_shadows:=.$(LIB_MAN_SUFFIX))
-	(for i in $(XDGA_shadows:=.$(LIB_MAN_SUFFIX)) ; do \
+	-rm -f $(XDGA_shadows:=.@LIB_MAN_SUFFIX@)
+	(for i in $(XDGA_shadows:=.@LIB_MAN_SUFFIX@) ; do \
 	 echo .so man$(LIB_MAN_SUFFIX)/XDGA.$(LIB_MAN_SUFFIX) > $$i; \
 	 done)
