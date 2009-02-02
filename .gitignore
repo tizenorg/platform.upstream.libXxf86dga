@@ -1,7 +1,11 @@
+.deps
+.libs
 aclocal.m4
 autom4te.cache
 compile
 config.guess
+config.h
+config.h.in
 config.log
 config.status
 config.sub
@@ -15,5 +19,13 @@ Makefile.in
 MakeOut
 missing
 mkinstalldirs
+stamp-h1
 xxf86dga.pc
 *~
+*.3
+*.o
+*.la
+*.lo
+libXxf86dga-*.tar.*
+ChangeLog
+tags
