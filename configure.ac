@@ -15,7 +15,7 @@ AC_PROG_LIBTOOL
 XORG_CWARNFLAGS
 
 # Checks for pkg-config packages
-PKG_CHECK_MODULES(XXF86DGA, xproto x11 xextproto xext [xf86dgaproto >= 2.0.3])
+PKG_CHECK_MODULES(XXF86DGA, xproto x11 xextproto xext [xf86dgaproto >= 2.0.99.1])
 XXF86DGA_CFLAGS="$CWARNFLAGS $XXF86DGA_CFLAGS"
 
 XORG_CHECK_MALLOC_ZERO

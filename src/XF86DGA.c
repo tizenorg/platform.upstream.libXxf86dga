@@ -63,7 +63,7 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 #define NEED_REPLIES
 #include <X11/Xlibint.h>
 #include <X11/extensions/xf86dga.h>
-#include <X11/extensions/xf86dgastr.h>
+#include <X11/extensions/xf86dgaproto.h>
 #include <X11/extensions/Xext.h>
 #include <X11/extensions/extutil.h>
 
