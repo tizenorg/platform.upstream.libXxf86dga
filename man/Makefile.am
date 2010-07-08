@@ -27,14 +27,14 @@ LIB_MAN_DIR_SUFFIX = $(LIB_MAN_DIR:@mandir@/man%=%)
 
 libman_PRE = XDGA.man
 
-BUILT_SOURCES = shadows.DONE
+BUILT_SOURCES = $(XDGA_shadowmen)
 
 EXTRA_DIST = $(libman_PRE)
 
 CLEANFILES = $(libman_DATA) $(BUILT_SOURCES)
 
 libman_DATA = $(libman_PRE:man=@LIB_MAN_SUFFIX@) \
-	      $(XDGA_shadows:=.@LIB_MAN_SUFFIX@)
+	      $(XDGA_shadowmen)
 
 SUFFIXES = .$(LIB_MAN_SUFFIX) .man
 
@@ -64,8 +64,6 @@ DGAFUNCS = XDGAQueryExtension \
 
 XDGA_shadows = XF86DGA XFree86-DGA $(DGAFUNCS)
 
-shadows.DONE:
-	-rm -f $(XDGA_shadows:=.@LIB_MAN_SUFFIX@)
-	(for i in $(XDGA_shadows:=.@LIB_MAN_SUFFIX@) ; do \
-	 echo .so man$(LIB_MAN_DIR_SUFFIX)/XDGA.$(LIB_MAN_SUFFIX) > $$i; \
-	 done)
+XDGA_shadowmen = $(XDGA_shadows:=.@LIB_MAN_SUFFIX@)
+$(XDGA_shadowmen):
+	$(AM_V_GEN)echo ".so man$(LIB_MAN_DIR_SUFFIX)/XDGA.$(LIB_MAN_SUFFIX)" > $@
