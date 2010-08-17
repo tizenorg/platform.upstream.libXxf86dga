@@ -23,47 +23,39 @@
 
 libmandir = $(LIB_MAN_DIR)
 
-LIB_MAN_DIR_SUFFIX = $(LIB_MAN_DIR:@mandir@/man%=%)
+libman_PRE =				\
+	XDGA.man			\
+	$(XDGA_shadows:=.man)
 
-libman_PRE = XDGA.man
+XDGA_functions =			\
+	XDGAQueryExtension		\
+	XDGAQueryVersion		\
+	XDGAQueryModes			\
+	XDGASetMode			\
+	XDGAOpenFramebuffer		\
+	XDGACloseFramebuffer		\
+	XDGASetViewport			\
+	XDGAInstallColormap		\
+	XDGACreateColormap		\
+	XDGASelectInput			\
+	XDGAFillRectangle		\
+	XDGACopyArea			\
+	XDGACopyTransparentArea		\
+	XDGAGetViewportStatus		\
+	XDGASync			\
+	XDGASetClientVersion		\
+	XDGAChangePixmapMode		\
+	XDGAKeyEventToXKeyEvent
 
-BUILT_SOURCES = $(XDGA_shadowmen)
+XDGA_shadows = XF86DGA XFree86-DGA $(XDGA_functions)
 
 EXTRA_DIST = $(libman_PRE)
+CLEANFILES = $(libman_DATA)
 
-CLEANFILES = $(libman_DATA) $(BUILT_SOURCES)
-
-libman_DATA = $(libman_PRE:man=@LIB_MAN_SUFFIX@) \
-	      $(XDGA_shadowmen)
+libman_DATA = $(libman_PRE:man=@LIB_MAN_SUFFIX@)
 
 SUFFIXES = .$(LIB_MAN_SUFFIX) .man
 
 # String replacements in MAN_SUBSTS now come from xorg-macros.m4 via configure
 .man.$(LIB_MAN_SUFFIX):
 	$(AM_V_GEN)$(SED) $(MAN_SUBSTS) < $< > $@
-
-# Generate man page shadow files (Replaces InstallManPageAliases from Imake)
-DGAFUNCS = XDGAQueryExtension \
-           XDGAQueryVersion \
-           XDGAQueryModes \
-           XDGASetMode \
-           XDGAOpenFramebuffer \
-           XDGACloseFramebuffer \
-           XDGASetViewport \
-           XDGAInstallColormap \
-           XDGACreateColormap \
-           XDGASelectInput \
-           XDGAFillRectangle \
-           XDGACopyArea \
-           XDGACopyTransparentArea \
-           XDGAGetViewportStatus \
-           XDGASync \
-           XDGASetClientVersion \
-           XDGAChangePixmapMode \
-           XDGAKeyEventToXKeyEvent
-
-XDGA_shadows = XF86DGA XFree86-DGA $(DGAFUNCS)
-
-XDGA_shadowmen = $(XDGA_shadows:=.@LIB_MAN_SUFFIX@)
-$(XDGA_shadowmen):
-	$(AM_V_GEN)echo ".so man$(LIB_MAN_DIR_SUFFIX)/XDGA.$(LIB_MAN_SUFFIX)" > $@
