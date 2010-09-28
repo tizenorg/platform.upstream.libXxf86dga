@@ -1,4 +1,3 @@
-/* $XFree86: xc/lib/Xxf86dga/XF86DGA2.c,v 1.23 2003/05/05 20:42:30 tsi Exp $ */
 /*
 
 Copyright (c) 1995  Jon Tombs
