@@ -372,9 +372,9 @@ etc.
 The dimensions of the portion of the framebuffer which will be displayed
 on the screen.
 .TP 8
-.I xViewPortStep
+.I xViewportStep
 .TP 8
-.I yViewPortStep
+.I yViewportStep
 The granularity of the x,y viewport positioning possible with the
 .BR XDGASetViewport ()
 function.
@@ -522,9 +522,9 @@ rectangle.
 sets the upper left-hand corner of the rectangle of framebuffer that is
 to be displayed on the screen.  Not all locations may be supported by
 the hardware and requested locations will be adjusted according to the
-.I xViewPortStep
+.I xViewportStep
 and
-.I yViewPortStep
+.I yViewportStep
 fields in the
 .IR XDGAMode .
 .PP
