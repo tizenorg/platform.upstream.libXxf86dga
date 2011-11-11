@@ -65,7 +65,7 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 #include <X11/extensions/extutil.h>
 
 extern XExtDisplayInfo* xdga_find_display(Display*);
-extern char *xdga_extension_name;
+extern const char *xdga_extension_name;
 
 #define XF86DGACheckExtension(dpy,i,val) \
   XextCheckExtension (dpy, i, xdga_extension_name, val)

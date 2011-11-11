@@ -25,7 +25,7 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 /* If you change this, change the Bases[] array below as well */
 #define MAX_HEADS 16
 
-char *xdga_extension_name = XF86DGANAME;
+const char *xdga_extension_name = XF86DGANAME;
 
 static XExtensionInfo _xdga_info_data;
 static XExtensionInfo *xdga_info = &_xdga_info_data;
@@ -760,7 +760,7 @@ typedef struct _DGAMapRec{
 } DGAMapRec, *DGAMapPtr;
 
 static Bool
-DGAMapPhysical(int, char*, unsigned char*, CARD32, CARD32, CARD32, DGAMapPtr);
+DGAMapPhysical(int, const char*, unsigned char*, CARD32, CARD32, CARD32, DGAMapPtr);
 static void DGAUnmapPhysical(DGAMapPtr);
 
 static DGAMapPtr _Maps = NULL;
@@ -852,7 +852,7 @@ XDGAUnmapFramebuffer(int screen)
 static Bool
 DGAMapPhysical(
    int screen,
-   char *name,			/* optional device name */
+   const char *name,		/* optional device name */
    unsigned char* base,		/* physical memory */
    CARD32 size,			/* size */
    CARD32 offset,		/* optional offset */
