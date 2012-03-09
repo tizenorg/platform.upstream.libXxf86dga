@@ -21,6 +21,7 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 #include <X11/extensions/extutil.h>
 #include <stdio.h>
 
+#include <stdint.h>
 
 /* If you change this, change the Bases[] array below as well */
 #define MAX_HEADS 16
