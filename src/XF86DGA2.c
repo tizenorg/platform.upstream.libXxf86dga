@@ -250,9 +250,14 @@ Bool XDGAOpenFramebuffer(
 	return False;
     }
 
-    if(rep.length) {
-	deviceName = Xmalloc(rep.length << 2);
-	_XRead(dpy, deviceName, rep.length << 2);
+    if (rep.length) {
+	if (rep.length < (INT_MAX >> 2)) {
+	    unsigned long size = rep.length << 2;
+	    deviceName = Xmalloc(size);
+	    _XRead(dpy, deviceName, size);
+	    deviceName[size - 1] = '\0';
+	} else
+	    _XEatDataWords(dpy, rep.length);
     }
 
     ret = XDGAMapFramebuffer(screen, deviceName,
