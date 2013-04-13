@@ -405,12 +405,15 @@ XDGASetMode(
     if (_XReply(dpy, (xReply *)&rep, 0, xFalse)) {
 	if(rep.length) {
 	   xXDGAModeInfo info;
-	   int size;
+	   unsigned long size;
 
-	   size = rep.length << 2;
-	   size -= sz_xXDGAModeInfo; /* get text size */
+	   if ((rep.length < (INT_MAX >> 2)) &&
+	       (rep.length > (sz_xXDGAModeInfo >> 2))) {
+	       size = rep.length << 2;
+	       size -= sz_xXDGAModeInfo; /* get text size */
 
-	   dev = (XDGADevice*)Xmalloc(sizeof(XDGADevice) + size);
+	       dev = Xmalloc(sizeof(XDGADevice) + size);
+	   }
 
 	   if(dev) {
 		_XRead(dpy, (char*)(&info), sz_xXDGAModeInfo);
@@ -451,6 +454,8 @@ XDGASetMode(
 		    dev->data += rep.offset;
 	   }
 	   /* not sure what to do if the allocation fails */
+	   else
+	       _XEatDataWords(dpy, rep.length);
 	}
     }
 
