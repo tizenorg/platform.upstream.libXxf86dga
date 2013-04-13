@@ -356,9 +356,16 @@ XDGAMode* XDGAQueryModes(
 		modes[i].reserved1 = info.reserved1;
 		modes[i].reserved2 = info.reserved2;
 
-		_XRead(dpy, offset, info.name_size);
-		modes[i].name = offset;
-		offset += info.name_size;
+		if (info.name_size > 0 && info.name_size <= size) {
+		    _XRead(dpy, offset, info.name_size);
+		    modes[i].name = offset;
+		    modes[i].name[info.name_size - 1] = '\0';
+		    offset += info.name_size;
+		    size -= info.name_size;
+		} else {
+		    _XEatData(dpy, info.name_size);
+		    modes[i].name = NULL;
+		}
 	      }
 	      *num = rep.number;
 	   } else
