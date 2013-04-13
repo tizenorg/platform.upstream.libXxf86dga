@@ -444,8 +444,14 @@ XDGASetMode(
 		dev->mode.reserved1 = info.reserved1;
 		dev->mode.reserved2 = info.reserved2;
 
-		dev->mode.name = (char*)(&dev[1]);
-		_XRead(dpy, dev->mode.name, info.name_size);
+		if (info.name_size > 0 && info.name_size <= size) {
+		    dev->mode.name = (char*)(&dev[1]);
+		    _XRead(dpy, dev->mode.name, info.name_size);
+		    dev->mode.name[info.name_size - 1] = '\0';
+		} else {
+		    dev->mode.name = NULL;
+		    _XEatDataWords(dpy, rep.length);
+		}
 
 		dev->pixmap = (rep.flags & XDGAPixmap) ? pid : 0;
 		dev->data = XDGAGetMappedMemory(screen);
