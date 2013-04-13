@@ -6,6 +6,9 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 */
 
 /* THIS IS NOT AN X CONSORTIUM STANDARD */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #ifdef __UNIXOS2__ /* needed here to override certain constants in X headers */
 #define INCL_DOS
@@ -22,6 +25,18 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 #include <stdio.h>
 
 #include <stdint.h>
+#include <limits.h>
+
+#ifndef HAVE__XEATDATAWORDS
+static inline void _XEatDataWords(Display *dpy, unsigned long n)
+{
+# ifndef LONG64
+    if (n >= (ULONG_MAX >> 2))
+        _XIOError(dpy);
+# endif
+    _XEatData (dpy, n << 2);
+}
+#endif
 
 /* If you change this, change the Bases[] array below as well */
 #define MAX_HEADS 16
@@ -342,7 +357,7 @@ XDGAMode* XDGAQueryModes(
 	      }
 	      *num = rep.number;
 	   } else
-		_XEatData(dpy, rep.length << 2);
+		_XEatDataWords(dpy, rep.length);
 	}
     }
 
