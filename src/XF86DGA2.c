@@ -312,16 +312,21 @@ XDGAMode* XDGAQueryModes(
     if (_XReply(dpy, (xReply *)&rep, 0, xFalse)) {
 	if(rep.length) {
 	   xXDGAModeInfo info;
-	   int i, size;
+	   unsigned long size = 0;
 	   char *offset;
 
-	   size = rep.length << 2;
-	   size -= rep.number * sz_xXDGAModeInfo; /* find text size */
-	   modes = (XDGAMode*)Xmalloc((rep.number * sizeof(XDGAMode)) + size);
-	   offset = (char*)(&modes[rep.number]); /* start of text */
+	   if ((rep.length < (INT_MAX >> 2)) &&
+	       (rep.number < (INT_MAX / sizeof(XDGAMode)))) {
+	       size = rep.length << 2;
+	       if (size > (rep.number * sz_xXDGAModeInfo)) {
+		   size -= rep.number * sz_xXDGAModeInfo; /* find text size */
+		   modes = Xmalloc((rep.number * sizeof(XDGAMode)) + size);
+		   offset = (char*)(&modes[rep.number]);  /* start of text */
+	       }
+	   }
 
-
-	   if(modes) {
+	   if (modes != NULL) {
+	      unsigned int i;
 	      for(i = 0; i < rep.number; i++) {
 		_XRead(dpy, (char*)(&info), sz_xXDGAModeInfo);
 
