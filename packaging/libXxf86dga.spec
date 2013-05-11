@@ -41,6 +41,7 @@ make %{?_smp_mflags}
 %postun -p /sbin/ldconfig
 
 %files
+%license COPYING
 %{_libdir}/libXxf86dga.so.1
 %{_libdir}/libXxf86dga.so.1.0.0
 
