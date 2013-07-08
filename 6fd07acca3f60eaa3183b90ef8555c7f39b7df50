@@ -1,0 +1,8 @@
+Change-Id: I6fd07acca3f60eaa3183b90ef8555c7f39b7df50
+Code-Review+2: Ryan Ware <ware@linux.intel.com>
+Verified+1: Ryan Ware <ware@linux.intel.com>
+Submitted-by: Ryan Ware <ware@linux.intel.com>
+Submitted-at: Mon, 08 Jul 2013 09:40:11 -0700
+Reviewed-on: https://review.tizen.org/gerrit/4812
+Project: platform/upstream/libXxf86dga
+Branch: refs/heads/tizen
