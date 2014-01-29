@@ -1,3 +1,5 @@
+%bcond_with x
+
 Name:           libXxf86dga
 Version:        1.1.3
 Release:        1
@@ -11,6 +13,10 @@ BuildRequires:  pkgconfig(xorg-macros)
 BuildRequires:  pkgconfig(xf86dgaproto)
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xext)
+
+%if !%{with x}
+ExclusiveArch:
+%endif
 
 %description
 X.Org X11 libXxf86dga runtime library
