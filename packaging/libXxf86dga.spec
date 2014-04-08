@@ -1,7 +1,7 @@
 %bcond_with x
 
 Name:           libXxf86dga
-Version:        1.1.3
+Version:        1.1.4
 Release:        1
 License:        MIT
 Summary:        X.Org X11 libXxf86dga runtime library
@@ -35,7 +35,7 @@ X.Org X11 libXxf86dga development package
 cp %{SOURCE1001} .
 
 %build
-%configure
+%autogen
 
 make %{?_smp_mflags}
 
